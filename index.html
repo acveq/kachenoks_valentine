@@ -97,20 +97,48 @@
       `;
     }
 
-    function moveNo() {
-      const button = document.getElementById("no");
-      const card = document.querySelector(".card");
-      const cardRect = card.getBoundingClientRect();
+   let lastX = 0;
+let lastY = 0;
 
-      const maxX = cardRect.width - button.offsetWidth - 20;
-      const maxY = cardRect.height - button.offsetHeight - 20;
+function moveNo() {
+  const button = document.getElementById("no");
+  const card = document.querySelector(".card");
+  const cardRect = card.getBoundingClientRect();
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+  const maxX = cardRect.width - button.offsetWidth - 20;
+  const maxY = cardRect.height - button.offsetHeight - 20;
 
-      button.style.left = x + "px";
-      button.style.top = y + "px";
+  let newX, newY;
+  
+  // Пробуем найти новую позицию до 10 раз
+  for (let i = 0; i < 10; i++) {
+    newX = Math.random() * maxX;
+    newY = Math.random() * maxY;
+    
+    // Проверяем, достаточно ли далеко от предыдущей позиции
+    const distance = Math.sqrt(
+      Math.pow(newX - lastX, 2) + Math.pow(newY - lastY, 2)
+    );
+    
+    // Если расстояние больше 30px - подходит
+    if (distance > 30) {
+      break;
     }
+    
+    // Если это последняя попытка - всё равно используем
+    if (i === 9) {
+      newX = Math.random() * maxX;
+      newY = Math.random() * maxY;
+    }
+  }
+
+  // Сохраняем новую позицию
+  lastX = newX;
+  lastY = newY;
+
+  button.style.left = newX + "px";
+  button.style.top = newY + "px";
+}
   </script>
 </body>
 </html>
