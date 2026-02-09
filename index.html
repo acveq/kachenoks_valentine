@@ -97,8 +97,7 @@
       `;
     }
 
-   let lastX = 0;
-let lastY = 0;
+let lastPositions = []; // Массив последних позиций
 
 function moveNo() {
   const button = document.getElementById("no");
@@ -108,32 +107,37 @@ function moveNo() {
   const maxX = cardRect.width - button.offsetWidth - 20;
   const maxY = cardRect.height - button.offsetHeight - 20;
 
+  const MIN_DISTANCE = 50; // Минимальное расстояние от предыдущей позиции
+  let attempts = 0;
   let newX, newY;
-  
-  // Пробуем найти новую позицию до 10 раз
-  for (let i = 0; i < 10; i++) {
+  let isValidPosition = false;
+
+  while (!isValidPosition && attempts < 20) {
     newX = Math.random() * maxX;
     newY = Math.random() * maxY;
     
-    // Проверяем, достаточно ли далеко от предыдущей позиции
-    const distance = Math.sqrt(
-      Math.pow(newX - lastX, 2) + Math.pow(newY - lastY, 2)
-    );
+    // Проверяем все последние позиции
+    isValidPosition = true;
     
-    // Если расстояние больше 30px - подходит
-    if (distance > 45) {
-      break;
+    for (const pos of lastPositions) {
+      const distance = Math.sqrt(
+        Math.pow(newX - pos.x, 2) + Math.pow(newY - pos.y, 2)
+      );
+      
+      if (distance < MIN_DISTANCE) {
+        isValidPosition = false;
+        break;
+      }
     }
     
-    // Если это последняя попытка - всё равно используем
-    if (i === 9) {
-      i = 0;
-    }
+    attempts++;
   }
 
-  // Сохраняем новую позицию
-  lastX = newX;
-  lastY = newY;
+  // Сохраняем новую позицию (храним последние 3)
+  lastPositions.push({ x: newX, y: newY });
+  if (lastPositions.length > 3) {
+    lastPositions.shift(); // Удаляем самую старую
+  }
 
   button.style.left = newX + "px";
   button.style.top = newY + "px";
