@@ -66,6 +66,29 @@
       color: white;
       position: absolute;
     }
+
+    #takePrize {
+      font-family: segoe ui, sans-serif;
+      position: absolute;
+      top: 29%;
+      left: 48%;
+      border-radius: 48px;
+      font-size: 48px;
+      background:  white;
+      color: #e74c3c;
+      position: bottom;
+    }
+
+    #yes1{
+      background: #2ecc71;
+      color: white;
+    }
+
+    #no1 {
+      background: #e74c3c;
+      color: white;
+    }
+
   </style>
 </head>
 <body>
@@ -84,20 +107,25 @@
 function sayYes1() {
       audio.src = 'music/msc.mp3';
       playMusic();
-
       document.body.innerHTML = `
         <div style="
-          height:700px;
+          height:600px;
           display:flex;
           justify-content:center;
           align-items:center;
           flex-direction:column;
-          background:linear-gradient(135deg,#ff4d6d,#ff758f);
+          background-image: url('images/yes.jpg');
+          background-repeat: no-repeat;
+          background-size: fill;
+          background-position: center;
+          background-attachment: fixed;
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
-          min-width:320px;
+          min-width:800px;
+          border-radius: 30px;
         ">
+        <button id="takePrize" onclick="sayNo1()">🎁</button>
         </div>
       `;
     }
@@ -124,6 +152,7 @@ function sayNo1() {
           min-width:705px;
           border-radius: 30px;
         ">
+        <button id="takePrize" onclick="sayNo1()">🎁</button>
         </div>
       `;
     }
@@ -141,28 +170,7 @@ function sayNo1() {
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
-
-        button {
-      font-size: 16px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.2s;
-    }
-
-    #yes1 {
-      background: #2ecc71;
-      color: white;
-    }
-
-    #no1 {
-      background: #e74c3c;
-      color: white;
-      position: absolute;
-    }
-        ">
+    ">
           <h1 style="font-size:32px; margin-bottom:15px;">ТЫ УВЕРЕНА?!</h1>
           <p style="font-size:18px; min-width:320px;">
             Можешь подумать ещё
@@ -173,10 +181,7 @@ function sayNo1() {
       `;
     }
 
-
-
 let lastPositions = []; // Массив последних позиций
-
 function moveNo() {
   const button = document.getElementById("no");
   const card = document.querySelector(".card");
@@ -220,20 +225,16 @@ function moveNo() {
   button.style.top = newY + "px";
 }
         const audio = new Audio();
-       
         function playMusic() {
             audio.play()
                 .then(() => console.log('Музыка играет'))
                 .catch(error => console.log('Ошибка воспроизведения:', error));
         }
-        
         function stopMusic() {
             audio.pause();
             audio.currentTime = 0; // сбрасываем время на начало
             console.log('Музыка остановлена');
         }
-
-
   </script>
 </body>
 </html>
