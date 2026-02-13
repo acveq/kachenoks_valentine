@@ -71,7 +71,7 @@
       font-family: segoe ui, sans-serif;
       position: absolute;
       top: 29%;
-      left: 48%;
+      left: 50%;
       border-radius: 48px;
       font-size: 48px;
       background:  white;
@@ -109,23 +109,28 @@ function sayYes1() {
       playMusic();
       document.body.innerHTML = `
         <div style="
-          height:600px;
+          width: 100vw;
+          height: 100vh;
+
           display:flex;
           justify-content:center;
           align-items:center;
           flex-direction:column;
+        
+
           background-image: url('images/yes.jpg');
           background-repeat: no-repeat;
           background-size: fill;
           background-position: center;
           background-attachment: fixed;
+          background-size: contain; 
+
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
-          min-width:800px;
           border-radius: 30px;
         ">
-        <button id="takePrize" onclick="sayNo1()">🎁</button>
+        <button id="takePrize" onclick="openGift()">🎁</button>
         </div>
       `;
     }
@@ -136,7 +141,9 @@ function sayNo1() {
 
       document.body.innerHTML = `
         <div style="
-          height:600px;
+          width: 100vw;
+          height: 100vh;
+
           display:flex;
           justify-content:center;
           align-items:center;
@@ -146,18 +153,22 @@ function sayNo1() {
           background-size: fill;
           background-position: center;
           background-attachment: fixed;
+          background-size: contain; 
+
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
-          min-width:705px;
+    
           border-radius: 30px;
         ">
-        <button id="takePrize" onclick="sayNo1()">🎁</button>
+        <button id="takePrize" onclick="openGift()">🎁</button>
         </div>
       `;
     }
 
-
+ function openGift(){
+  window.location.href = "https://t.me/marrisskaaaaaa";
+ }
     function sayYes() {
       document.body.innerHTML = `
         <div style="
