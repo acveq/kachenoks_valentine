@@ -80,6 +80,50 @@
   </div>
 
   <script>
+
+function sayYes1() {
+      audio.src = 'music/msc.mp3';
+      playMusic();
+
+      document.body.innerHTML = `
+        <div style="
+          height:700px;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+          background:linear-gradient(135deg,#ff4d6d,#ff758f);
+          color:white;
+          font-family:Arial,sans-serif;
+          text-align:center;
+          min-width:320px;
+        ">
+        </div>
+      `;
+    }
+
+function sayNo1() {
+      audio.src = 'music/msc2.mp3';
+      playMusic();
+      
+      document.body.innerHTML = `
+        <div style="
+          height:700px;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+          background:linear-gradient(135deg,#ff4d6d,#ff758f);
+          color:white;
+          font-family:Arial,sans-serif;
+          text-align:center;
+          min-width:320px;
+        ">
+        </div>
+      `;
+    }
+
+
     function sayYes() {
       document.body.innerHTML = `
         <div style="
@@ -118,11 +162,13 @@
           <p style="font-size:18px; min-width:320px;">
             Можешь подумать ещё
           </p>
-          <button id="yes1" onclick="playMusic()">Да, я уверена ✅</button>
-          <button id="no1" onclick="sayYes()">Ещё подумаю 💔</button>
+          <button id="yes1" onclick="sayYes1()">Да, я уверена ✅</button>
+          <button id="no1" onclick="sayNo1()">Ещё подумаю 💔</button>
         </div>
       `;
     }
+
+
 
 let lastPositions = []; // Массив последних позиций
 
@@ -165,15 +211,11 @@ function moveNo() {
   if (lastPositions.length > 3) {
     lastPositions.shift(); // Удаляем самую старую
   }
-
   button.style.left = newX + "px";
   button.style.top = newY + "px";
-
-
 }
-
         const audio = new Audio();
-        audio.src = 'music/msc.mp3'; 
+       
         function playMusic() {
             audio.play()
                 .then(() => console.log('Музыка играет'))
@@ -185,6 +227,8 @@ function moveNo() {
             audio.currentTime = 0; // сбрасываем время на начало
             console.log('Музыка остановлена');
         }
+
+
   </script>
 </body>
 </html>
