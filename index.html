@@ -105,19 +105,24 @@ function sayYes1() {
 function sayNo1() {
       audio.src = 'music/msc2.mp3';
       playMusic();
-      
+
       document.body.innerHTML = `
         <div style="
-          height:700px;
+          height:600px;
           display:flex;
           justify-content:center;
           align-items:center;
           flex-direction:column;
-          background:linear-gradient(135deg,#ff4d6d,#ff758f);
+          background-image: url('images/no.jpg');
+          background-repeat: no-repeat;
+          background-size: fill;
+          background-position: center;
+          background-attachment: fixed;
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
-          min-width:320px;
+          min-width:705px;
+          border-radius: 30px;
         ">
         </div>
       `;
