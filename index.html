@@ -73,7 +73,7 @@
     <h1>Will you be my Valentine? ❤️</h1>
     <p>
       Я тебя не тороплю, можешь подумать<br>
-      Как примешь решение - нажми
+      Как примешь решение - нажми!
     </p>
     <button id="yes" onclick="sayYes()">Да 💘</button>
     <button id="no" onmouseover="moveNo()">Нет 🙈</button>
@@ -83,7 +83,7 @@
     function sayYes() {
       document.body.innerHTML = `
         <div style="
-          height:100vh;
+          height:700px;
           display:flex;
           justify-content:center;
           align-items:center;
@@ -92,11 +92,34 @@
           color:white;
           font-family:Arial,sans-serif;
           text-align:center;
+
+        button {
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.2s;
+    }
+
+    #yes1 {
+      background: #2ecc71;
+      color: white;
+    }
+
+    #no1 {
+      background: #e74c3c;
+      color: white;
+      position: absolute;
+    }
         ">
-          <h1 style="font-size:32px; margin-bottom:15px;">YAYYYY! 💖</h1>
-          <p style="font-size:18px; max-width:320px;">
-            You just made me the happiest person alive 🥺✨
+          <h1 style="font-size:32px; margin-bottom:15px;">ТЫ УВЕРЕНА?!</h1>
+          <p style="font-size:18px; min-width:320px;">
+            Можешь подумать ещё
           </p>
+          <button id="yes1" onclick="playMusic()">Да, я уверена ✅</button>
+          <button id="no1" onclick="sayYes()">Ещё подумаю 💔</button>
         </div>
       `;
     }
@@ -145,7 +168,23 @@ function moveNo() {
 
   button.style.left = newX + "px";
   button.style.top = newY + "px";
+
+
 }
+
+        const audio = new Audio();
+        audio.src = 'music/msc.mp3'; 
+        function playMusic() {
+            audio.play()
+                .then(() => console.log('Музыка играет'))
+                .catch(error => console.log('Ошибка воспроизведения:', error));
+        }
+        
+        function stopMusic() {
+            audio.pause();
+            audio.currentTime = 0; // сбрасываем время на начало
+            console.log('Музыка остановлена');
+        }
   </script>
 </body>
 </html>
